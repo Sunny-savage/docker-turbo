@@ -29,3 +29,10 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: visunie/todo-app-backend:${{ github.sha }}
+
+      - name : Deploy to VM
+        run: |
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+           
+            chmod 700 /home/runner/ssh_key
+            ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.61.184.195 -t "docker stop user_backend && docker run --name user_backend -d -p 8080:8080 visunie/todo-app-backend:${{ github.sha }}"
