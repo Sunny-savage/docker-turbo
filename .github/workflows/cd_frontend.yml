@@ -37,4 +37,4 @@
                   echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
                  
                   chmod 700 /home/runner/ssh_key
-                  ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.61.184.195 -t "docker ps -aq | xargs -r docker rm -f && docker run --name user_backend -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d -p 8080:8080 visunie/todo-app-frontend:${{ github.sha }}"
+                  ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@13.61.184.195 -t "docker ps -aq | xargs -r docker stop && docker ps -aq | xargs -r docker rm && docker run --name user_backend -e DATABASE_URL=${{ secrets.DATABASE_URL }} -d -p 8080:8080 visunie/todo-app-frontend:${{ github.sha }}"
