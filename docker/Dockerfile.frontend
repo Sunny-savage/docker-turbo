@@ -11,11 +11,12 @@ COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 COPY ./apps/web ./apps/web
 COPY ./turbo.json ./turbo.json
-RUN bun install 
 RUN apt-get update && apt-get install -y openssl
 
+RUN bun install 
 
 
+RUN echo "Database URL is: $DATABASE_URL"
 
 
 RUN bun run generate:db
