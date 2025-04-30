@@ -21,7 +21,15 @@
             with:
               username: ${{ secrets.DOCKERHUB_USERNAME }}
               password: ${{ secrets.DOCKERHUB_TOKEN }}
-    
+
+
+          - name: Check DATABASE_URL secret
+            run: |
+                echo "DATABASE_URL is $DATABASE_URL"
+            env:
+                DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+
           - name: Build and push
             uses: docker/build-push-action@v4
             with:
