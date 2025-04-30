@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y openssl
 
 
 RUN bun run generate:db
-RUN DATABASE_URL=${DATABASE_URL} bun run build:frontend
+RUN bun run build:frontend
 
 
 EXPOSE 3000
