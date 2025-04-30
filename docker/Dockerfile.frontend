@@ -12,12 +12,14 @@ COPY ./bun.lock ./bun.lock
 COPY ./apps/web ./apps/web
 COPY ./turbo.json ./turbo.json
 RUN bun install 
+RUN apt-get update && apt-get install -y openssl
+
 
 
 
 
 RUN bun run generate:db
-RUN bun run build
+RUN bunx turbo build --filter=web...
 
 
 EXPOSE 3000

@@ -9,6 +9,8 @@ COPY ./bun.lock ./bun.lock
 COPY ./apps/websocket ./apps/websocket
 COPY ./turbo.json ./turbo.json
 RUN bun install 
+RUN apt-get update && apt-get install -y openssl
+
 
 
 
