@@ -23,11 +23,6 @@
               password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
-          - name: Check DATABASE_URL secret
-            run: |
-                echo "DATABASE_URL is $DATABASE_URL"
-            env:
-                DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
 
           - name: Build and push
@@ -35,8 +30,7 @@
             with:
               context: .
               file: ./docker/Dockerfile.frontend
-              build-args: |
-                 DATABASE_URL=${{ secrets.DATABASE_URL }}
+              build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
               push: true
               tags: visunie/todo-app-frontend:${{ github.sha }}
 
